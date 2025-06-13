@@ -1,15 +1,10 @@
 pipeline {
     agent any
     tools {
-        maven 'maven'     // Usa el nombre configurado en Global Tool Configuration
-        jdk 'jdk21'       // Ruta: /root/.sdkman/candidates/java/current
+        maven 'maven'
+        jdk 'jdk21'
     }
     stages {
-        stage('Clonar') {
-            steps {
-                git url: 'https://github.com/hlcxpl/repo_devops_jenkins.git'
-            }
-        }
         stage('Compilar') {
             steps {
                 sh 'mvn clean compile'
