@@ -2,25 +2,24 @@ pipeline {
     agent any
     environment {
         JAVA_HOME = '/root/.sdkman/candidates/java/current'
-        MAVEN_HOME = '/root/.sdkman/candidates/maven/current'
-        PATH = "${env.JAVA_HOME}/bin:${env.MAVEN_HOME}/bin:${env.PATH}"
+        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
     }
     stages {
         stage('Compilar') {
             steps {
                 sh 'java -version'
-                sh 'mvn -version'
-                sh 'mvn clean compile'
+                sh '/root/.sdkman/candidates/maven/current/bin/mvn -version'
+                sh '/root/.sdkman/candidates/maven/current/bin/mvn clean compile'
             }
         }
         stage('Probar') {
             steps {
-                sh 'mvn test'
+                sh '/root/.sdkman/candidates/maven/current/bin/mvn test'
             }
         }
         stage('Empaquetar') {
             steps {
-                sh 'mvn package'
+                sh '/root/.sdkman/candidates/maven/current/bin/mvn package'
             }
         }
         stage('Publicar artefacto') {
