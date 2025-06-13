@@ -23,6 +23,11 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage('Publicar artefacto') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
     }
     post {
         success {
