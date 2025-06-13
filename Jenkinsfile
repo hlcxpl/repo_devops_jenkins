@@ -1,25 +1,21 @@
 pipeline {
     agent any
-    environment {
-        JAVA_HOME = '/root/.sdkman/candidates/java/current'
-        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-    }
     stages {
         stage('Compilar') {
             steps {
                 sh 'java -version'
-                sh '/root/.sdkman/candidates/maven/current/bin/mvn -version'
-                sh '/root/.sdkman/candidates/maven/current/bin/mvn clean compile'
+                sh 'mvn -version'
+                sh 'mvn clean compile'
             }
         }
         stage('Probar') {
             steps {
-                sh '/root/.sdkman/candidates/maven/current/bin/mvn test'
+                sh 'mvn test'
             }
         }
         stage('Empaquetar') {
             steps {
-                sh '/root/.sdkman/candidates/maven/current/bin/mvn package'
+                sh 'mvn package'
             }
         }
         stage('Publicar artefacto') {
