@@ -1,12 +1,16 @@
 pipeline {
     agent any
+    environment {
+        JAVA_HOME = '/root/.sdkman/candidates/java/current'
+        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
+    }
     tools {
         maven 'maven'
-        jdk 'jdk21'
     }
     stages {
         stage('Compilar') {
             steps {
+                sh 'java -version'
                 sh 'mvn clean compile'
             }
         }
